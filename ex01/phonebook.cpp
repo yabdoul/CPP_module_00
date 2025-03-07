@@ -44,9 +44,12 @@ void ShowMenu()
 int main( ) 
  {     
      PhoneBook  phone_book= PhoneBook() ;   
-     char * cmd  ;   
+     char * cmd  ;    
      std::cout<<"Hello in your phonebook\n" ;
-     ShowMenu() ;    
-     std::cin>>cmd  ;         
-     phone_book.HandleCmd(cmd) ;     
+     while(1) 
+     {
+          ShowMenu() ;    
+          std::cin>>cmd  ;         
+          phone_book.HandleCmd(cmd) ;     
+     }   
     }    
