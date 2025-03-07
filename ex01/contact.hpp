@@ -10,13 +10,12 @@ class Contact
           std::string darkest_secret;   
         public:   
         Contact() { 
-            
-        }  ;    
+        }  ;      
+        ~Contact()  ;   
         Contact(std::string f_name ,  std::string l_name ,  std::string  n_name  , std::string  secret ) ;    
         std::string  get_first_name();     
         std::string  get_last_name();   
         std::string  get_nickname();    
-        std::string  get_darkest_secret();     
-    
+        std::string  get_darkest_secret();      
    } ;     
 #endif   
