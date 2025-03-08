@@ -1,7 +1,8 @@
 #include "phonebook.hpp"  
 #include "contact.hpp"
 #include <iostream>   
-#include <iomanip> 
+#include <iomanip>  
+using namespace std ;    
 PhoneBook::PhoneBook()
  {    
           contacts_num =  0 ;      
@@ -17,34 +18,97 @@ void  PhoneBook::add_contact(Contact contact )
           std::cout<<"contact added succesfully !\n" ;   
           Contacts[this->contacts_num]  =  contact ;    
           contacts_num++ ;   
+}    
+Contact PhoneBook::get_contact(int index) 
+{ 
+    return Contacts[index] ;   
+}   
+int PhoneBook::get_contacts_num() 
+{ 
+    return contacts_num  ;   
 } 
-
+void string_max_len(std::string str , int max_len) 
+{ 
+    if(str.length() > max_len) 
+    { 
+        std::cout<<str.substr(0,max_len-1)  ; 
+    } 
+    else
+    { 
+        std::cout<<str    ; 
+    } 
+}    
+void PhoneBook::HandleCmd(std::string  cmd  )  
+   {   
+       std::cout<<"cmd : "<<cmd<<std::endl;  
+            if(cmd.compare("SEARCH")  ==  0  )   
+                    this->ShowAll() ;  
+            else if(cmd.compare("ADD")  ==  0  )  
+                {  
+                    std::string f_name , l_name , n_name , secret ;  
+                    std::cout<<"Enter first name\n" ;  
+                    std::cin>>f_name ;  
+                    std::cout<<"Enter last name\n" ;  
+                    std::cin>>l_name ;  
+                    std::cout<<"Enter nickname\n" ;  
+                    std::cin>>n_name ;  
+                    std::cout<<"Enter darkest secret\n" ;  
+                    std::cin>>secret ;  
+                    Contact contact = Contact(f_name,l_name,n_name,secret) ;  
+                    this->add_contact(contact) ;  
+                }  
+            else if(cmd.compare("EXIT")  ==  0  )  
+                {  
+                    std::cout<<"Goodbye\n" ;  
+                    exit(0) ;  
+                }
+            else
+                {  
+                    std::cout<<"Invalid command\n" ;  
+                }
+        
+      }
+void truncateAndPrint(const std::string& str, int width) {
+    if (str.length() > width) {
+        std::cout << std::setw(width) << std::right << str.substr(0, width - 1) + '.';
+    } else {
+        std::cout << std::setw(width) << std::right << str;
+    }
+}
 
 void PhoneBook::ShowAll()
 {  
-       int i = 0 ;   
-     std::cout << "------------------------------------------------------------\n";
-    std::cout << "| Index | First Name  | Last Name   |  Nickname   |\n";
     std::cout << "------------------------------------------------------------\n";
-       for (int i = 0; i < contacts_num; i++) {
-        std::cout << "| " << std::setw(5) << i + 1 << " | "
-                  << std::setw(10) << Contacts[i].get_first_name() << " | "
-                  << std::setw(10) << Contacts[i].get_last_name() << " | "
-                  << std::setw(10) << Contacts[i].get_nickname() << " |\n";
+    std::cout << "| Index | First Name  | Last Name   | Nicknam |Darkest Secret|\n";
+    std::cout << "------------------------------------------------------------\n";
+    for (int i = 0; i < get_contacts_num(); i++)  
+    {   
+        std::cout << "| " << std::setw(5) << std::right << i + 1 << " | ";
+        truncateAndPrint(Contacts[i].get_first_name(), 10);
+        std::cout << " | ";
+        truncateAndPrint(Contacts[i].get_last_name(), 10);
+        std::cout << " | ";
+        truncateAndPrint(Contacts[i].get_nickname(), 10) ;   
+        std::cout << " | ";
+        truncateAndPrint(Contacts[i].get_darkest_secret(), 10);
+        std::cout << " |\n";
     }
-        std::cout << "------------------------------------------------------------\n";
-}  
+    std::cout << "------------------------------------------------------------\n";
+}
 
 void ShowMenu()
 {  
      std::cout<<"Enter ADD to add a contact\n" ;  
      std::cout<<"Enter SEARCH to show all contacts\n" ;  
-     std::cout<<"Enter EXIT to exit\n" ;  
-}
+     std::cout<<"Enter EXIT to exit\n" ;   
+     std::cout<<"\n" ;
+}  
+
+
 int main( ) 
  {     
      PhoneBook  phone_book= PhoneBook() ;   
-     char * cmd  ;    
+     std::string cmd    ;    
      std::cout<<"Hello in your phonebook\n" ;
      while(1) 
      {
@@ -53,3 +117,5 @@ int main( )
           phone_book.HandleCmd(cmd) ;     
      }   
     }    
+
+

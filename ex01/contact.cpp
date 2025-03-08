@@ -14,6 +14,11 @@ std::string  Contact::get_last_name()
 std::string  Contact::get_nickname()
 {  
         return nick_name ;  
-}  
+} 
+
+std::string  Contact::get_darkest_secret()
+{ 
+         return darkest_secret ;   
+}   
 
  
