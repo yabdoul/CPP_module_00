@@ -6,7 +6,7 @@
 /*   By: yabdoul <yabdoul@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 14:57:17 by yabdoul           #+#    #+#             */
-/*   Updated: 2025/03/16 15:01:26 by yabdoul          ###   ########.fr       */
+/*   Updated: 2025/03/18 00:21:14 by yabdoul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ void print_contact (Contact contacts[]  ,   int index   )
 }
 void PhoneBook::HandleCmd(std::string  cmd  )  
    {   
-       std::cout<<"cmd : "<<cmd<<std::endl;  
             if(cmd.compare("SEARCH")  ==  0  )   
                  {  
                     int id_contact ;    
                     this->ShowAll() ;   
-                    std::cout<<"Enter the index of the contact you want to see\n"   ; 
                     std::cin>>id_contact ;        
                     print_contact(Contacts , id_contact-1)   ; 
                  }   
@@ -103,6 +101,11 @@ void truncateAndPrint(const std::string& str, int width) {
 
 void PhoneBook::ShowAll()
 {  
+   if(this->contacts_num  == 0  )  
+    {  
+        std::cout <<"| phonebook  is empty |\n" ;       
+        return ;     
+    } 
     std::cout << "------------------------------------------------------------\n";
     std::cout << "| Index | First Name  | Last Name   | Nicknam |Darkest Secret|\n";
     std::cout << "------------------------------------------------------------\n";
@@ -118,7 +121,8 @@ void PhoneBook::ShowAll()
         truncateAndPrint(Contacts[i].get_darkest_secret(), 10);
         std::cout << " |\n";
     }
-    std::cout << "------------------------------------------------------------\n";
+        std::cout << "------------------------------------------------------------\n"; 
+        std::cout<<"Enter the index of the contact you want to see\n"   ;  
 }
 
 void ShowMenu()

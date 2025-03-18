@@ -1,7 +1,7 @@
-NAME = phonebook
+NAME = megaphone
 
-SRCS = phonebook.cpp  contact.cpp 
- 
+SRCS = megaphone.cpp   
+
 CC = c++
 
 CFLAGS = 	-Wall -Werror -Wextra -std=c++98 -g 
