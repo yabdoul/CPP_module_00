@@ -4,7 +4,7 @@ SRCS = megaphone.cpp
 
 CC = c++
 
-CFLAGS = 	-Wall -Werror -Wextra -std=c++98 -g 
+CFLAGS = 	-Wall -Werror -Wextra -std=c++98 -g3  -fsanitize=address 
 
 OBJECTS = $(SRCS:.cpp=.o)
 
@@ -14,7 +14,7 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
 clean:
-	rm -f $(OBJECTS) # Ensure only object files are removed
+	rm -f $(OBJECTS) 
 
 fclean: clean
 	rm -f $(NAME)
